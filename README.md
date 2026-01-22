@@ -1,16 +1,43 @@
-# React + Vite
+Environment setup (important):
+Create your own API keys and copy all .env.example files to .env, then paste your keys inside them. Never commit real API keys.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Terminal 1 – Start the main application:
+Open a terminal in the project root and run npm install followed by npm run dev. Keep this terminal running. This starts the main application (usually at http://localhost:5173).
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+Terminal 2 – Start the voice assistant (Python):
+Open a new terminal, go to the voice assistant folder using cd voice-assistant, 
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Remove any existing virtual environment using 
+rm -rf venv
+
+2. Create a new virtual environment with 
+python3.11 -m venv venv.               #Python 3.11 or higher required)
+
+3. Activate it using 
+source venv/bin/activate, 
+
+4. Upgrade pip using 
+pip install --upgrade pip
+pip install livekit-agents livekit-rtc
+pip install livekit-plugins-silero
+pip install livekit-plugins-google
+pip install livekit-plugins-turn-detector
+pip install python-dotenv
+
+5. And start the voice assistant with 
+python app.py start
+#Keep this terminal running.
+
+
+
+Terminal 3 – Start the voice UI:
+Open another terminal, navigate to voice-assistant, clone the LiveKit UI repo using git clone https://github.com/livekit-examples/agent-starter-react.git, move into it with cd agent-starter-react, run npm install, and then npm run dev.
+
+
+
+Final usage:
+Keep all three terminals running and access the project using the main application URL shown in Terminal 1 (http://localhost:5173).
