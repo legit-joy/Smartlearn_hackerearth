@@ -1,3 +1,6 @@
+Clone the complete project (including the voice assistant UI submodule) using:
+git clone --recurse-submodules https://github.com/legit-joy/Smartlearn_hackerearth.git
+
 Environment setup (important):
 Create your own API keys and copy all .env.example files to .env, then paste your keys inside them. Never commit real API keys.
 
