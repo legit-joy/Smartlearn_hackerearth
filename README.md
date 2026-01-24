@@ -11,54 +11,139 @@ The frontend of this project is deployed using **GitHub Pages**.
 - **Tools**  
   👉 https://legit-joy.github.io/Smartlearn_hackerearth/#/tools
 
-> ⚠️ Note:  
-> The AI chatbot and voice assistant require the backend (Python + LiveKit) to be running locally.  
-> GitHub Pages hosts only the frontend UI.
+> ⚠️ **Important Note**  
+> GitHub Pages hosts only the frontend UI.  
+> The AI chatbot and voice assistant require backend services (Python + LiveKit) to be running locally.
 
-Clone the complete project (including the voice assistant UI submodule) using:
+---
+
+## ⚠️ Backend Requirement (Mandatory)
+
+This project uses a **Python + LiveKit backend** for:
+- AI chatbot responses
+- Voice-based assistant (Explain AI)
+
+To use chat and voice features, the backend **must be running locally**.
+
+---
+
+## 📥 Clone the Repository
+
+Clone the complete project (including the LiveKit voice UI submodule):
+
+```bash
 git clone --recurse-submodules https://github.com/legit-joy/Smartlearn_hackerearth.git
+cd Smartlearn_hackerearth
+```
 
-Environment setup (important):
-Create your own API keys and copy all .env.example files to .env, then paste your keys inside them. Never commit real API keys.
+---
 
+## 🔐 Environment Setup
 
+Create your own API keys and copy all example environment files:
 
-Terminal 1 – Start the main application:
-Open a terminal in the project root and run npm install followed by npm run dev. Keep this terminal running. This starts the main application (usually at http://localhost:5173).
+```bash
+cp .env.example .env
+cp voice-assistant/.env.example voice-assistant/.env
+```
 
+Paste your keys into the `.env` files.  
+**Never commit real API keys.**
 
+---
 
-Terminal 2 – Start the voice assistant (Python):
-Open a new terminal, go to the voice assistant folder using cd voice-assistant, 
+## ▶️ Terminal 1 – Start Frontend Application
 
-1. Remove any existing virtual environment using 
+Open a terminal in the project root and run:
+
+```bash
+npm install
+npm run dev
+```
+
+The frontend will start at:
+```
+http://localhost:5173
+```
+
+Keep this terminal running.
+
+---
+
+## 🧠 Terminal 2 – Start Backend (Python + LiveKit)
+
+Open a new terminal:
+
+```bash
+cd voice-assistant
+```
+
+### 1. Remove any existing virtual environment
+```bash
 rm -rf venv
+```
 
-2. Create a new virtual environment with 
-python3.11 -m venv venv.               (Python 3.11 or higher required)
+### 2. Create a new virtual environment (Python 3.11+ required)
+```bash
+python3.11 -m venv venv
+```
 
-3. Activate it using 
-source venv/bin/activate, 
+### 3. Activate the virtual environment
+```bash
+source venv/bin/activate
+```
 
-4. Upgrade pip using 
+### 4. Upgrade pip and install dependencies
+```bash
 pip install --upgrade pip
 pip install livekit-agents livekit-rtc
 pip install livekit-plugins-silero
 pip install livekit-plugins-google
 pip install livekit-plugins-turn-detector
 pip install python-dotenv
+```
 
-5. And start the voice assistant with 
+### 5. Start the backend services
+```bash
 python app.py start
-#Keep this terminal running.
+```
 
+Keep this terminal running.
 
+---
 
-Terminal 3 – Start the voice UI:
-Open another terminal, navigate to voice-assistant, clone the LiveKit UI repo using git clone https://github.com/livekit-examples/agent-starter-react.git, move into it with cd agent-starter-react, run npm install, and then npm run dev.
+## 🎙️ Terminal 3 – Start Voice Assistant UI (LiveKit)
 
+Open another terminal:
 
+```bash
+cd voice-assistant/agent-starter-react
+npm install
+npm run dev
+```
 
-Final usage:
-Keep all three terminals running and access the project using the main application URL shown in Terminal 1 (http://localhost:5173).
-<!-- trigger rebuild -->
+This starts the LiveKit voice UI (usually at `http://localhost:3000`).  
+Keep this terminal running.
+
+> Note: The LiveKit UI is included as a Git submodule and is automatically available when cloning with `--recurse-submodules`.
+
+---
+
+## ✅ Final Usage
+
+- Keep **all three terminals running**
+- Open the app at:  
+  👉 http://localhost:5173
+- Chatbot works via backend
+- Mic button enables real-time voice assistant
+
+---
+
+## 🧠 Summary
+
+- Frontend: React + Vite (GitHub Pages)
+- Backend: Python + LiveKit
+- Voice AI: Real-time audio with LiveKit
+- APIs: External LLM & speech services
+
+---
