@@ -44,3 +44,4 @@ Open another terminal, navigate to voice-assistant, clone the LiveKit UI repo us
 
 Final usage:
 Keep all three terminals running and access the project using the main application URL shown in Terminal 1 (http://localhost:5173).
+<!-- trigger rebuild -->
