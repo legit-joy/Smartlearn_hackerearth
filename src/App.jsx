@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -39,37 +39,35 @@ const RequireAuth = ({ children }) => {
 
 function App() {
   return (
-    <Router>
-      <div className="h-screen flex flex-col">
-        <ReloadHandler />
-        <Navbar />
-        <div className="flex-1 min-h-0">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/chat"
-              element={
-                <RequireAuth>
-                  <Chat />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="/tools"
-              element={
-                <RequireAuth>
-                  <Tools />
-                </RequireAuth>
-              }
-            />
-            <Route path="/help" element={<Help />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/documentation" element={<Documentation />} />
-          </Routes>
-        </div>
+    <div className="h-screen flex flex-col">
+      <ReloadHandler />
+      <Navbar />
+      <div className="flex-1 min-h-0">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/chat"
+            element={
+              <RequireAuth>
+                <Chat />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/tools"
+            element={
+              <RequireAuth>
+                <Tools />
+              </RequireAuth>
+            }
+          />
+          <Route path="/help" element={<Help />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/documentation" element={<Documentation />} />
+        </Routes>
       </div>
-    </Router>
+    </div>
   );
 }
 

@@ -1,3 +1,20 @@
+## 🌐 Live Demo (GitHub Pages)
+
+The frontend of this project is deployed using **GitHub Pages**.
+
+- **Home**  
+  👉 https://legit-joy.github.io/Smartlearn_hackerearth/#/
+
+- **Chat**  
+  👉 https://legit-joy.github.io/Smartlearn_hackerearth/#/chat
+
+- **Tools**  
+  👉 https://legit-joy.github.io/Smartlearn_hackerearth/#/tools
+
+> ⚠️ Note:  
+> The AI chatbot and voice assistant require the backend (Python + LiveKit) to be running locally.  
+> GitHub Pages hosts only the frontend UI.
+
 Clone the complete project (including the voice assistant UI submodule) using:
 git clone --recurse-submodules https://github.com/legit-joy/Smartlearn_hackerearth.git
 
