@@ -15,7 +15,7 @@ Open a new terminal, go to the voice assistant folder using cd voice-assistant,
 rm -rf venv
 
 2. Create a new virtual environment with 
-python3.11 -m venv venv.               #Python 3.11 or higher required)
+python3.11 -m venv venv.               (Python 3.11 or higher required)
 
 3. Activate it using 
 source venv/bin/activate, 
