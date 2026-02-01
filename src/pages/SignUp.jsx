@@ -4,11 +4,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { signupWithEmail, isAuthenticated } from '../utils/auth'
 
 const SignUp = () => {
-  const [email,setEmail] = useState('')
-  const [showPass,setShowPass] = useState(false)
-  const [password,setPassword] = useState('')
-  const [loading,setLoading] = useState(false)
+  const [email, setEmail] = useState('')
+  const [showPass, setShowPass] = useState(false)
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const [name, setName] = useState('')
+  const [username, setUsername] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
   const from = location.state?.from?.pathname || '/chat'
@@ -25,8 +27,8 @@ const SignUp = () => {
     setLoading(true)
 
     try {
-      if (email && password) {
-        await signupWithEmail({ email })
+      if (name && email && password) {
+        await signupWithEmail({ name, username, email, password })
         navigate(from, { replace: true })
       }
     } catch (err) {
@@ -41,8 +43,8 @@ const SignUp = () => {
       <div className="w-full max-w-md">
         <div className='bg-white rounded-2xl shadow-2xl border border-gray-100 p-8'>
           <div className='text-center mb-8'>
-            <h3 className='text-3xl text-gray-900 font-bold mb-2'>Welcome Back</h3>
-            <p className='text-gray-600'>Sign in to continue</p>
+            <h3 className='text-3xl text-gray-900 font-bold mb-2'>Create your account</h3>
+            <p className='text-gray-600'>Sign up to get started with Smartlearn</p>
           </div>
 
           {error && (
@@ -52,7 +54,29 @@ const SignUp = () => {
           )}
 
           <form onSubmit={handleSubmit}>
-            <div className='flex flex-col gap-y-1 mt-6'>
+            <div className='flex flex-col gap-y-1 mt-2'>
+              <label htmlFor="name" className='mx-7 text-gray-700 font-medium'>Full Name</label>
+              <input
+                id="name"
+                type="text"
+                placeholder='Your full name'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className='mx-7 bg-gray-50 text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#20B2AA] focus:border-transparent transition-all'
+                required
+              />
+            </div>
+            <div className='flex flex-col gap-y-1 mt-3'>
+              <label htmlFor="username" className='mx-7 text-gray-700 font-medium'>Username</label>
+              <input
+                id="username"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className='mx-7 bg-gray-50 text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#20B2AA] focus:border-transparent transition-all'
+              />
+            </div>
+            <div className='flex flex-col gap-y-1 mt-3'>
               <label htmlFor="email" className='mx-7 text-gray-700 font-medium '>Email Address</label>
               <input 
                 id="email"
@@ -122,7 +146,7 @@ const SignUp = () => {
                     Signing up...
                   </div>
                 ) : (
-                  "Sign In"
+                  "Sign Up"
                 )}
               </button>
             </div>
