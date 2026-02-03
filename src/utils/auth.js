@@ -1,12 +1,15 @@
 const AUTH_STORAGE_KEY = 'smartlearn_auth';
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || '/api/v1';
+
 export function getAuth() {
   try {
     const raw = sessionStorage.getItem(AUTH_STORAGE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
     if (!parsed || typeof parsed !== 'object') return null;
-    if (!parsed.email || typeof parsed.email !== 'string') return null;
+    if (!parsed.user?.email || typeof parsed.user.email !== 'string') return null;
     return parsed;
   } catch {
     return null;
@@ -35,17 +38,51 @@ export function clearAuth() {
   }
 }
 
-export async function loginWithEmail({ email }) {
-  // Simulate API call
-  await new Promise((resolve) => setTimeout(resolve, 800));
-  setAuth({ email, provider: 'email', createdAt: Date.now() });
+async function requestJson(path, options = {}) {
+  const res = await fetch(`${API_BASE_URL}${path}`, {
+    headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+    ...options,
+  });
+  const data = await res.json().catch(() => null);
+  if (!res.ok) {
+    const msg = data?.message || `Request failed (${res.status})`;
+    throw new Error(msg);
+  }
+  return data;
+}
+
+export async function loginWithEmail({ email, password }) {
+  const json = await requestJson('/users/login', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  });
+  const payload = {
+    provider: 'email',
+    createdAt: Date.now(),
+    user: json?.data?.user,
+    accessToken: json?.data?.accessToken,
+  };
+  setAuth(payload);
   return getAuth();
 }
 
-export async function signupWithEmail({ email }) {
-  // Simulate API call
-  await new Promise((resolve) => setTimeout(resolve, 800));
-  setAuth({ email, provider: 'email', createdAt: Date.now() });
+export async function signupWithEmail({ name, fullName, username, email, password }) {
+  const json = await requestJson('/users/signup', {
+    method: 'POST',
+    body: JSON.stringify({
+      fullName: (fullName ?? name) || '',
+      username,
+      email,
+      password,
+    }),
+  });
+  const payload = {
+    provider: 'email',
+    createdAt: Date.now(),
+    user: json?.data?.user,
+    accessToken: json?.data?.accessToken,
+  };
+  setAuth(payload);
   return getAuth();
 }
 
@@ -56,7 +93,7 @@ export async function signInWithProvider(provider) {
     provider === 'google'
       ? 'google.user@smartlearn.demo'
       : 'github.user@smartlearn.demo';
-  setAuth({ email, provider, createdAt: Date.now() });
+  setAuth({ user: { email }, provider, createdAt: Date.now() });
   return getAuth();
 }
 
