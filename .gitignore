@@ -34,10 +34,6 @@ dist-ssr
 # Python virtual environments
 venv/
 .venv/
-<<<<<<< HEAD
 voice-assistant/venv/
 
 frontend/
-=======
-voice-assistant/venv/
->>>>>>> parent of 5455382 (Ignore frontend folder)
