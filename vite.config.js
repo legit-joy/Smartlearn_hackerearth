@@ -6,4 +6,12 @@ export default defineConfig({
   base: "/Smartlearn_hackerearth/",
   plugins: [react(),tailwindcss(),
 ],
+server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true
+      }
+    }
+  }
 })
