@@ -28,7 +28,7 @@ const Login = () => {
 
     try {
       if (email && password) {
-        await loginWithEmail({ email })
+        await loginWithEmail({ email, password })
         navigate(from, { replace: true })
       }
     } catch (err) {
@@ -56,13 +56,13 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             <div className='flex flex-col gap-y-2 mb-4'>
               <label htmlFor="email" className='text-gray-700 font-medium'>Email Address</label>
-              <input 
+              <input
                 id="email"
                 type="email"
                 placeholder='you@example.com'
                 value={email}
-                onChange={(e)=> setEmail(e.target.value)}
-                className='bg-gray-50 text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#20B2AA] focus:border-transparent transition-all' 
+                onChange={(e) => setEmail(e.target.value)}
+                className='bg-gray-50 text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#20B2AA] focus:border-transparent transition-all'
                 required
               />
             </div>
@@ -72,14 +72,14 @@ const Login = () => {
                 <label htmlFor='password' className='text-gray-700 font-medium'>Password</label>
                 <a href='#' className='text-[#20B2AA] hover:underline text-sm'>Forgot Password?</a>
               </div>
-              <input 
+              <input
                 id="password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className='w-full bg-gray-50 text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#20B2AA] focus:border-transparent transition-all' 
+                className='w-full bg-gray-50 text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#20B2AA] focus:border-transparent transition-all'
                 required
-                type="password" 
+                type="password"
               />
             </div>
 
@@ -88,8 +88,8 @@ const Login = () => {
               <label htmlFor="remember" className='text-gray-700'>Remember me</label>
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className='w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-3 px-4 rounded-lg hover:from-pink-600 hover:to-pink-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-200 font-semibold'
               disabled={loading}
             >
